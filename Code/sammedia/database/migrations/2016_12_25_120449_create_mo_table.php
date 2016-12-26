@@ -13,14 +13,13 @@ class CreateMoTable extends Migration
      */
     public function up()
     {
-        Schema::create('mo', function (Blueprint $table) {
+        Schema::create('mos', function (Blueprint $table) {
             $table->increments('id');
             $table->string("msisdn");
             $table->integer("operatorid");
             $table->integer("shortcodeid");
             $table->string("text");
             $table->string("auth_token");
-            $table->dateTimeTz("created_at");
             $table->timestamps();
         });
     }

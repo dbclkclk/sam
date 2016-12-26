@@ -26,6 +26,7 @@ $factory->define(App\Mo::class, function (Faker\Generator $faker) {
         'shortcodeid'=>$faker->shortcodeid,
         'text'=>$faker->text,
         'auth_token'=>$faker->auth_token,
+        'updated_at'=>$faker->updated_at
         'created_at'=>$faker->created_at
     ];
 });
