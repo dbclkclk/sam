@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
                 array_push($insert_values,array("msisdn"=>"1111111","operatorid"=>"1","shortcodeid"=>"2","text"=>$v[ $c % count($v) ],"auth_token"=>"token","created_at"=>$date));
                 if ($c % 10000 === 0) {
                     
-                    DB::table('mo')->insert($insert_values);
+                    DB::table('mos')->insert($insert_values);
                     unset($insert_values);        
                     $insert_values = array();
                 }

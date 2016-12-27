@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mo;
 use App\Jobs\MoJob;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class IndexController extends Controller
 {
@@ -21,14 +22,17 @@ class IndexController extends Controller
     }
     public function LogCode (Request $request)
     {
-        $moModel = new Mo();
+        $moModel = new Mo;
         $moModel->msisdn = $request->query("msisdn");
         $moModel->operatorid = $request->query("operatorid");
         $moModel->shortcodeid = $request->query("shortcodeid");
         $moModel->text = $request->query("text");
+        $moModel->save();
 
-        $job = (new MoJob($moModel))->delay(Carbon::now()->addMinutes(1));
+        $job = new MoJob($moModel);
+    //     Log::debug(time()." Start Time");
         $this->dispatch($job);
+    //    Log::debug(time()."End Time");
 
 
     }

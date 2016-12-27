@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\Mo;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class MoJob extends Job
 {
@@ -23,15 +25,20 @@ class MoJob extends Job
      *
      * @return void
      */
-    public function handle(BaseRepository $repository)
+    public function handle()
     {
         $result = $this->get_auth_token($this->moModel);
         $this->moModel->auth_token = $result;
-        $repository->create($this->moModel->toArray());
+        $this->moModel->save();
     }
     private function get_auth_token(Mo $model) {
             $path = base_path();
             $arg = json_encode($model->toArray());
-            return resource_path().`/bash/registermo $arg`;
+            //Log::debug();
+            return shell_exec(resource_path()."/bash/registermo $arg");
+    }
+    public function failed(Exception $exception)
+    {
+       Log::debug($exception);
     }
 }
