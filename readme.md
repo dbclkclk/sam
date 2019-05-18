@@ -1,5 +1,3 @@
 # Laravel Homestead
 
-The official Laravel local development environment.
-
-Official documentation [is located here](http://laravel.com/docs/homestead).
+Batch processing system done with Laravel that takes data from a REST API and transferring it to a running job process (background). 
